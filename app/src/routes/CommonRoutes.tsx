@@ -3,10 +3,10 @@ import Login from "../screens/Auth/Login";
 
 const Stack = createNativeStackNavigator();
 
-export function CommonRoutes(props: { setSignedIn: Function }) {
+export function CommonRoutes() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={() => <Login setSignedIn={props.setSignedIn} />} options={{ headerShown: false }} />
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

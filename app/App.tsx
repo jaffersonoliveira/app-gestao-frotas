@@ -1,6 +1,8 @@
 import "react-native-gesture-handler";
 import { StatusBar, NativeBaseProvider, extendTheme } from "native-base";
 import Routes from "./src/routes";
+import UseContext from "./src/components/AuthContext";
+import { config as dotenv } from "dotenv";
 
 // Define the config
 const config = {
@@ -23,7 +25,9 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <StatusBar />
-      <Routes />
+      <UseContext>
+        <Routes />
+      </UseContext>
     </NativeBaseProvider>
   );
 }
