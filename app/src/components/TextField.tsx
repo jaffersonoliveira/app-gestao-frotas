@@ -1,14 +1,15 @@
-import { useField } from "formik";
-import { CheckIcon, FormControl, Input, Text, WarningOutlineIcon } from "native-base";
+import { FieldHookConfig, useField } from "formik";
+import { FormControl, Input, Text, WarningOutlineIcon, IInputProps } from "native-base";
 
-export default function TextField(props: any) {
+export default function TextField(props: FieldHookConfig<string> & { name: string; label: string } & IInputProps) {
   const [field, meta] = useField(props);
+
   return (
-    <FormControl {...props} isInvalid={(meta.error ? true : false) && meta.touched}>
+    <FormControl isInvalid={meta.error ? true : false}>
       <FormControl.Label>
         <Text color="gray.50">{props.label}</Text>
       </FormControl.Label>
-      <Input bgColor="gray.50" borderWidth="0" borderRadius={6} size="md" h="50" {...field} {...props}></Input>
+      <Input borderColor="error.400" bgColor="gray.50" borderWidth={meta.error ? 2 : 0} borderRadius={6} size="md" h="50" {...field} {...props} />
       <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>{meta.error}</FormControl.ErrorMessage>
     </FormControl>
   );

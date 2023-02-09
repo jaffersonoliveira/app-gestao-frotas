@@ -2,6 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Dashboard from "../screens/Dash/Dashboard";
 import Abastecimento from "../screens/Abastecimento/AbastecimentoForm";
 import CustomSidebarMenu from "../components/SideBar/CustomSidebarMenu";
+import Supply from "../screens/Abastecimento/Supply";
 
 const Drawer = createDrawerNavigator();
 
@@ -22,7 +23,8 @@ export function SecureRoutes() {
       drawerContent={(props: any) => <CustomSidebarMenu {...props} />}
     >
       <Drawer.Screen name="Dashboard" component={Dashboard} />
-      <Drawer.Screen name="Abastecimento" component={Abastecimento} />
+      <Drawer.Screen name="Abastecimento" component={Supply} options={{ unmountOnBlur: true }} />
+      <Drawer.Screen name="AbastecimentoForm" options={{ title: "+ Abastecimento", unmountOnBlur: true }} component={Abastecimento} />
     </Drawer.Navigator>
   );
 }
