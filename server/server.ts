@@ -1,6 +1,8 @@
 import express, { Request, Response, Errback, NextFunction } from "express";
 import { config as dotenv } from "dotenv";
-import abastecimento from "../server/src/routes/abastecimentoRoute";
+import supply from "./src/routes/abastecimentoRoute";
+import vehicles from "./src/routes/vehicleRoute";
+import auth from "./src/routes/authRoute";
 
 dotenv({ path: process.env.NODE_ENV === "production" ? ".env" : ".env.testing" });
 
@@ -9,7 +11,9 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
-app.use("/abastecimento", abastecimento);
+app.use("/supply", supply);
+app.use("/vehicle", vehicles);
+app.use("/auth", auth);
 
 app.use((error: Errback, req: Request, res: Response, next: NextFunction) => {
   console.log(error);

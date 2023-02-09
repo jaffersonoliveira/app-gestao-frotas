@@ -19,8 +19,8 @@ export async function post(tableName: string, datas: Object) {
   return response;
 }
 
-export async function get<T extends RowDataPacket>(tableName: string): Promise<T[]> {
-  const queryString = `select * from ${tableName}`;
+export async function get<T extends RowDataPacket>(columns: string[], tableName: string, filters?: string): Promise<T[]> {
+  const queryString = `select ${columns.toString()} from ${tableName} ${filters ?? ""}`;
   const [rows] = await database.query<T[]>(queryString);
   return rows;
 }
