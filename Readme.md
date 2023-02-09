@@ -1,9 +1,17 @@
-# NativeBase TypeScript Expo Template
+# Aplicativo para gestão de frotas
 
-The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
+## Tecnologias
 
-## Usage
+Front:
 
-```sh
-expo init my-app --template @native-base/expo-template-typescript
-```
+- React Native (Expo)
+- Typescript
+- Native Base
+- Formik & yup
+
+Back:
+
+- Node
+- Typescript
+- Express
+- Mysql
