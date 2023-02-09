@@ -1,12 +1,13 @@
 import * as Yup from "yup";
 import { pt } from "yup-locale-pt";
 import { Request } from "express";
-import { postAbastecimentoService } from "../services/abastecimentoService";
+import { postAbastecimentoService, getSupplyService } from "../services/abastecimentoService";
 
 Yup.setLocale(pt);
 
 export async function postAbastecimentoController(req: Request) {
   const data = req.body;
+  console.log(data);
   const validationSchema = Yup.object({
     data: Yup.date().required().label("data"),
     idveiculo: Yup.number().integer().positive().required().label("id_veiculo"),
@@ -21,4 +22,8 @@ export async function postAbastecimentoController(req: Request) {
 
   validationSchema.validateSync(data);
   return postAbastecimentoService(data);
+}
+
+export async function getSupplyController() {
+  return getSupplyService();
 }
