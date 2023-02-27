@@ -8,17 +8,21 @@ Yup.setLocale(pt);
 export async function postAbastecimentoController(req: Request) {
   const data = req.body;
   console.log(data);
-  const validationSchema = Yup.object({
-    data: Yup.date().required().label("data"),
-    idveiculo: Yup.number().integer().positive().required().label("id_veiculo"),
-    combustivel: Yup.string().required().label("combustivel"),
-    preco: Yup.number().required().label("preco"),
-    quant: Yup.number().required().label("quant"),
-    total_abastecimento: Yup.number().required().label("total_abastecido"),
-    tipo: Yup.string().label("tipo"),
-    veiculo: Yup.string().label("veiculo"),
-    modelo: Yup.string().label("modelo"),
-  });
+  const validationSchema = Yup.array()
+    .min(1)
+    .of(
+      Yup.object({
+        data: Yup.date().required().label("data"),
+        idveiculo: Yup.number().integer().positive().required().label("id_veiculo"),
+        combustivel: Yup.string().required().label("combustivel"),
+        preco: Yup.number().required().label("preco"),
+        quant: Yup.number().required().label("quant"),
+        total_abastecimento: Yup.number().required().label("total_abastecido"),
+        tipo: Yup.string().label("tipo"),
+        veiculo: Yup.string().label("veiculo"),
+        modelo: Yup.string().label("modelo"),
+      })
+    );
 
   validationSchema.validateSync(data);
   return postAbastecimentoService(data);
