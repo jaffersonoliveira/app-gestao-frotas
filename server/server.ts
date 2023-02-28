@@ -3,6 +3,7 @@ import { config as dotenv } from "dotenv";
 import supply from "./src/routes/abastecimentoRoute";
 import vehicles from "./src/routes/vehicleRoute";
 import auth from "./src/routes/authRoute";
+import fuel from "./src/routes/fuelRoute";
 
 dotenv({ path: process.env.NODE_ENV === "production" ? ".env" : ".env.testing" });
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/supply", supply);
 app.use("/vehicle", vehicles);
 app.use("/auth", auth);
+app.use("/fuel", fuel);
 
 app.use((error: Errback, req: Request, res: Response, next: NextFunction) => {
   console.log(error);
