@@ -1,5 +1,10 @@
-import { get } from "./genericDatas";
+import database from "../../db";
 
 export async function getVehicles() {
-  return get(["idveiculo", "placa", "veiculo", "combustivel"], "veiculos");
+  const queryString = `
+    select veiculos.idveiculo, veiculos.placa, veiculos.veiculo, veiculos.combustivel, combustiveis.preco  
+    from veiculos 
+    left join combustiveis on veiculos.combustivel = combustiveis.combustivel`;
+  const [rows] = await database.query(queryString);
+  return rows;
 }
