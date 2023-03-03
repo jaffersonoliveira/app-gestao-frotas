@@ -1,7 +1,7 @@
 export interface IPostAbastecimento {
   data: string;
   idveiculo: number;
-  combustivel: string;
+  idcombustivel: number;
   preco: number;
   quant: number;
   total_abastecimento: number;
