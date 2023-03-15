@@ -20,3 +20,16 @@ export async function getSupply() {
   const [rows] = await database.query(queryString);
   return rows;
 }
+
+export async function getLastKm(vehicleId: number) {
+  const queryString = `
+    select 
+      hodo_hori_pos km
+    from abastecimento
+    where idveiculo = ${vehicleId}
+    order by data desc 
+    limit 1;
+  `;
+  const [rows] = await database.query(queryString);
+  return rows;
+}

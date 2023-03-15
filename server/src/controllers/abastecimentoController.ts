@@ -1,13 +1,12 @@
 import * as Yup from "yup";
 import { pt } from "yup-locale-pt";
 import { Request } from "express";
-import { postAbastecimentoService, getSupplyService } from "../services/abastecimentoService";
+import { postAbastecimentoService, getSupplyService, getLastKmService } from "../services/abastecimentoService";
 
 Yup.setLocale(pt);
 
 export async function postAbastecimentoController(req: Request) {
   const data = req.body;
-  console.log(data);
   const validationSchema = Yup.array()
     .min(1)
     .of(
@@ -23,11 +22,19 @@ export async function postAbastecimentoController(req: Request) {
         modelo: Yup.string().label("modelo"),
       })
     );
-
   validationSchema.validateSync(data);
   return postAbastecimentoService(data);
 }
 
 export async function getSupplyController() {
   return getSupplyService();
+}
+
+export async function getLastKmController(req: Request) {
+  const data: any = req.params;
+  const validationSchema = Yup.object({
+    vehicleId: Yup.number().integer().positive().required().label("vehicleId"),
+  });
+  validationSchema.validateSync(data);
+  return getLastKmService(data);
 }
