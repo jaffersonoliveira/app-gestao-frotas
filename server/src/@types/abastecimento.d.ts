@@ -6,6 +6,7 @@ export interface IPostAbastecimento {
   quant: number;
   total_abastecimento: number;
   tipo: string;
+  hodo_hori_pos: number;
   veiculo: string;
   modelo: string;
 }
