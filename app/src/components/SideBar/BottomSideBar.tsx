@@ -4,18 +4,20 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthContext";
 
 export default function BottomSideBar() {
-  const { setSignedIn } = useContext(AuthContext);
+  const { setSignedIn, user } = useContext(AuthContext);
   return (
-    <Box h="11%" borderTopWidth={1} borderTopColor="gray.800" p={3}>
-      <HStack h="100%" space={5} alignContent="space-between" alignItems="center">
+    <Box h="11%" borderColor="red" borderTopWidth={1} borderTopColor="gray.800">
+      <HStack h="100%" borderColor="red" p={3} justifyContent="space-between" alignItems="center">
         <Avatar bg="gray.50" size={"md"}>
           <Icon as={<MaterialIcons name="person" />} size={10} color="gray.700" />
         </Avatar>
         <VStack>
-          <Heading fontSize="xl" color="gray.50">
-            Lucas de Souza
+          <Heading fontSize="xs" color="gray.50">
+            {user.name}
           </Heading>
-          <Text color="gray.50">Administrador</Text>
+          <Text color="gray.50" fontSize="xs">
+            {user.function}
+          </Text>
         </VStack>
         <Icon as={<MaterialIcons name="logout" />} size="xl" color="gray.50" onPress={() => setSignedIn(false)} />
       </HStack>

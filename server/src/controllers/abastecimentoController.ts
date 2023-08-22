@@ -17,7 +17,7 @@ export async function postAbastecimentoController(req: Request) {
         preco: Yup.number().required().label("preco"),
         quant: Yup.number().required().label("quant"),
         hodo_hori_pos: Yup.number().positive().label("hodo_hori_pos"),
-        hodo_hori_ant: Yup.number().positive().label("hodo_hori_ant"),
+        hodo_hori_ant: Yup.number().label("hodo_hori_ant"),
         total_abastecimento: Yup.number().required().label("total_abastecido"),
         tipo: Yup.string().label("tipo"),
         veiculo: Yup.string().label("veiculo"),
@@ -35,7 +35,7 @@ export async function getSupplyController() {
 export async function getLastKmController(req: Request) {
   const data: any = req.params;
   const validationSchema = Yup.object({
-    vehicleId: Yup.number().integer().positive().required().label("vehicleId"),
+    vehicleId: Yup.number().integer().required().label("vehicleId"),
   });
   validationSchema.validateSync(data);
   return getLastKmService(data);

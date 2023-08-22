@@ -9,10 +9,10 @@ export default function ItemList(props: Props) {
     <Box w="100%" h="70" borderRadius="8" bgColor="#384459" shadow={"5"} justifyContent="center" p="3">
       <HStack alignItems="center" space="md">
         <Icon as={<MaterialIcons name="fuel" />} size="xl" color="#ECC94B" />
-        <VStack>
-          <Heading color="white">{props.datas.desc_veiculo.slice(0, 15)}</Heading>
+        <VStack> 
+          <Heading color="white">{props.datas.desc_veiculo?.slice(0, 15)}</Heading>
           <HStack justifyContent="space-between">
-            <Text color="white">{new Date(props.datas.data).toLocaleDateString("pt_BR")}</Text>
+            <Text color="white">{props.datas.data?.slice(0, 10).split("-").reverse().join("/")}</Text>
             <Text color="white"> | R$ {props.datas.total_abastecimento}</Text>
             <Text color="white"> | {props.datas.placa}</Text>
           </HStack>

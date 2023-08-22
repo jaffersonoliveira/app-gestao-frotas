@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "app-gestao-frotas",
+    "name": "App Frotas",
     "slug": "app-gestao-frotas",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,25 +8,29 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#434242"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#434242"
+      },
+      "package": "com.jaffersondev.appgestaofrotas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8694f778-bd5f-4316-9422-76b12e06aea5"
+      }
     }
   }
 }
