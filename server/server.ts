@@ -4,6 +4,7 @@ import supply from "./src/routes/abastecimentoRoute";
 import vehicles from "./src/routes/vehicleRoute";
 import auth from "./src/routes/authRoute";
 import fuel from "./src/routes/fuelRoute";
+import statistics from './src/routes/statisticsRoute';
 
 dotenv({ path: process.env.NODE_ENV === "production" ? ".env" : ".env.testing" });
 
@@ -16,6 +17,7 @@ app.use("/supply", supply);
 app.use("/vehicle", vehicles);
 app.use("/auth", auth);
 app.use("/fuel", fuel);
+app.use('/statistcs', statistics)
 
 app.use((error: Errback, req: Request, res: Response, next: NextFunction) => {
   console.log(error);
