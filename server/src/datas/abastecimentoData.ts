@@ -16,7 +16,7 @@ export async function getSupply() {
     left join veiculos 
       on abastecimento.idveiculo = veiculos.idveiculo 
     order by data desc
-    limit 100`;
+    limit 50`;
   const [rows] = await database.query(queryString);
   return rows;
 }
