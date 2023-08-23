@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useToast } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 import axios from "axios";
@@ -16,8 +17,8 @@ type Actions = "Post" | "Put" | "Delete";
 type Functions = "Auth" | "Supply"; // construir um tipo com as rotas da api, disponivel globalmente
 
 type Node = {
-  value: Value;
-  next: Node | null;
+  value: any;
+  next: Node | null | undefined;
 };
 
 const OfflineQueue = createContext<OfflineQueueType>({} as OfflineQueueType);
@@ -26,10 +27,11 @@ const OfflineQueueProvider = ({ children }: any) => {
   const [front, setFront] = useState<Node | null | undefined>(null);
   const [back, setBack] = useState<Node | null | undefined>(null);
   const [isConnected, setIsConnected] = useState<boolean | null>(null);
+  const toast = useToast();
 
   async function init() {
     const localFront = await AsyncStorage.getItem("front");
-    const localBack = await AsyncStorage.getItem("front");
+    const localBack = await AsyncStorage.getItem("back");
     localFront && setFront(JSON.parse(localFront));
     localBack && setBack(JSON.parse(localBack));
   }
@@ -58,15 +60,17 @@ const OfflineQueueProvider = ({ children }: any) => {
         setFront(node);
         setBack(node);
         return;
+      } else {
+        back.next = node; // Atualizar o next do nó anterior
+        setBack(node);    // Atualizar o estado back para o novo nó
       }
-      setBack({ ...back, next: node } as Node);
     },
     [back, isEmpty]
   );
 
   const dequeue = useCallback(() => {
     const node = front;
-    if (isEmpty()) setFront((state) => state?.next);
+    if (!isEmpty()) setFront((state) => state?.next);
     if (!front) setBack(null);
     return node;
   }, [front, isEmpty]);
@@ -84,6 +88,7 @@ const OfflineQueueProvider = ({ children }: any) => {
 
   const sync = useCallback(async () => {
     if (!isEmpty()) {
+      toast.show({title: "sincronizadondo abastecimentos...", bgColor: "green", placement: "top"})
       const queue = getQueue();
       for (const item of queue) {
         let uri = "";
@@ -94,10 +99,17 @@ const OfflineQueueProvider = ({ children }: any) => {
         }
         // implement dynamic action [put, post, delete]
         const response = await axios.post<{ success: boolean; message: string }[]>(uri, item.value);
-        if (response.data[0].success) dequeue();
+        if (response.data[0].success) {
+          dequeue();
+          toast.show({title: "abastecimento sincronizado", bgColor: "green", placement: "top"})
+        }
+        else {
+          toast.show({ title: "Erro ao sincronizar abastecimentos", bgColor: "error.500" })
+          break;
+        }
       }
     }
-  }, [isEmpty, getQueue]);
+  },[isEmpty, getQueue]);
 
   useEffect(() => {
     console.log(isConnected);
