@@ -17,7 +17,7 @@ app.use("/supply", supply);
 app.use("/vehicle", vehicles);
 app.use("/auth", auth);
 app.use("/fuel", fuel);
-app.use('/statistcs', statistics)
+app.use('/statistics', statistics)
 
 app.use((error: Errback, req: Request, res: Response, next: NextFunction) => {
   console.log(error);
