@@ -1,14 +1,18 @@
 import database from "../../db";
 
 export async function getStatistics() {
-    const queryGetSupplies = `select count(*) qtde, sum(quant*preco) total from abastecimento`;
-    const queryGetVehicles = `select count(*) qtde from veiculos`;
-    const queryGetTanks = `select count(*) qtde, sum(saldo) saldo from tanques`;
+    const queryGetSuppliesQtde = `select count(*) total from abastecimento`;
+    const queryGetSuppliesValue = `select sum(quant*preco) total from abastecimento`;
+    const queryGetVehicles = `select count(*) total from veiculos`;
+    const queryGetTanksQtde = `select count(*) total from tanques`;
+    const queryGetTanksValue = `select sum(saldo) total from tanques`;
 
-    const supplies = (await database.query(queryGetSupplies))[0];
+    const suppliesQtde = (await database.query(queryGetSuppliesQtde))[0];
+    const suppliesValue = (await database.query(queryGetSuppliesValue))[0];
     const vehicles = (await database.query(queryGetVehicles))[0];
-    const tanks = (await database.query(queryGetTanks))[0];
+    const tanksQtde = (await database.query(queryGetTanksQtde))[0];
+    const tanksValue = (await database.query(queryGetTanksValue))[0];
 
-    return {supplies, vehicles,tanks};
+    return {suppliesQtde, suppliesValue, vehicles, tanksQtde, tanksValue};
   }
   
