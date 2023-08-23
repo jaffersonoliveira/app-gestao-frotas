@@ -24,7 +24,7 @@ export async function getSupply() {
 export async function getLastKm(vehicleId: number) {
   const queryString = `
     select 
-      hodo_hori_pos km
+      hodo_pos km
     from abastecimento
     where idveiculo = ${vehicleId}
     order by data desc 

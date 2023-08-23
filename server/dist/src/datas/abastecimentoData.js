@@ -42,7 +42,7 @@ function getLastKm(vehicleId) {
     return __awaiter(this, void 0, void 0, function* () {
         const queryString = `
     select 
-      hodo_hori_pos km
+      hodo_pos km
     from abastecimento
     where idveiculo = ${vehicleId}
     order by data desc 
