@@ -3,6 +3,7 @@ import Dashboard from "../screens/Dash/Dashboard";
 import Abastecimento from "../screens/Abastecimento/AbastecimentoForm";
 import CustomSidebarMenu from "../components/SideBar/CustomSidebarMenu";
 import Supply from "../screens/Abastecimento/Supply";
+import QueueOfflie from "../screens/Queue/QueueOffline";
 
 const Drawer = createDrawerNavigator();
 
@@ -23,8 +24,9 @@ export function SecureRoutes() {
       drawerContent={(props: any) => <CustomSidebarMenu {...props} />}
     >
       <Drawer.Screen name="Dashboard" component={Dashboard} />
-      <Drawer.Screen name="Abastecimento" component={Supply} options={{ unmountOnBlur: true }} />
-      <Drawer.Screen name="AbastecimentoForm" options={{ title: "+ Abastecimento", unmountOnBlur: true }} component={Abastecimento} />
+      <Drawer.Screen name="Abastecimento" component={Supply} options={{ title: "Listar Abastecimentos", unmountOnBlur: true }} />
+      <Drawer.Screen name="AbastecimentoForm" options={{ title: "Adicionar Abastecimento", unmountOnBlur: true }} component={Abastecimento} />
+      <Drawer.Screen name="Pendencias" component={QueueOfflie} options={{ unmountOnBlur: true }} />
     </Drawer.Navigator>
   );
 }
