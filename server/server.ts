@@ -5,6 +5,7 @@ import vehicles from "./src/routes/vehicleRoute";
 import auth from "./src/routes/authRoute";
 import fuel from "./src/routes/fuelRoute";
 import fuelTank from "./src/routes/fuelTankRoute";
+import location from "./src/routes/locationRoute";
 import statistics from './src/routes/statisticsRoute';
 
 dotenv({ path: process.env.NODE_ENV === "production" ? ".env" : ".env.testing" });
@@ -19,6 +20,7 @@ app.use("/vehicle", vehicles);
 app.use("/auth", auth);
 app.use("/fuel", fuel);
 app.use("/fuelTank", fuelTank);
+app.use("/location", location);
 app.use('/statistics', statistics);
 
 app.use((error: Errback, req: Request, res: Response, next: NextFunction) => {
